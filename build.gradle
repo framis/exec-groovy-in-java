@@ -1,0 +1,17 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+def groovy = 'org.codehaus.groovy:groovy:2.4.5'
+def testDeps = 'junit:junit:4.12'
+
+dependencies {
+    compile      groovy
+    testCompile  testDeps
+}
