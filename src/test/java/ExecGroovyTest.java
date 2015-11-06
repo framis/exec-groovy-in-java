@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class ExecGroovyTest {
 
@@ -51,5 +53,23 @@ public class ExecGroovyTest {
         String script = "return a";
 
         shell.evaluate(script);
+    }
+
+    @Test
+    public void ExecuteFromJsonTest() throws IOException {
+        Binding binding = new Binding();
+        binding.setVariable("input", 2);
+        GroovyShell shell = new GroovyShell(binding);
+
+        URL url = Thread.currentThread().getContextClassLoader().getResource("simpleConfig.json");
+        final File file = new File(url.getPath());
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> map = mapper.readValue(file, Map.class);
+
+        String script = map.get("script");
+
+        Object result = shell.evaluate(script);
+        assertEquals(result, 12);
     }
 }

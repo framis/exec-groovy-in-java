@@ -8,10 +8,11 @@ apply plugin: 'idea'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def groovy = 'org.codehaus.groovy:groovy:2.4.5'
+def groovy   = 'org.codehaus.groovy:groovy:2.4.5'
+def json     = 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 def testDeps = 'junit:junit:4.12'
 
 dependencies {
-    compile      groovy
+    compile      groovy, json
     testCompile  testDeps
 }
